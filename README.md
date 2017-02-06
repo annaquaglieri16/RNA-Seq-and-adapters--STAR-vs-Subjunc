@@ -1,6 +1,3 @@
-Table of Contents
-=================
-
    * [Align RNA-Seq data with adapter contamination](#align-rna-seq-data-with-adapter-contamination)
       * [How the worries started](#how-the-worries-started)
       * [Where did my reads go?](#where-did-my-reads-go)
