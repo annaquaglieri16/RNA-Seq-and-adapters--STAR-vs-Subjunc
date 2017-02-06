@@ -1,13 +1,13 @@
-**Table of Contents**  
+Table of Contents
+=================
 
-- [Align RNA-Seq data with adapter contamination](#)
-	- [How the worries started](#)
-	- [Where did my reads go?](#)
-		- [Comparisons of some defaults parameters: STAR and Subjunc](#)
-		- [Read-through adapters](#)
-		- [Methods comparison](#)
-- [Tips learnt](#)
-
+   * [Align RNA-Seq data with adapter contamination](#align-rna-seq-data-with-adapter-contamination)
+      * [How the worries started](#how-the-worries-started)
+      * [Where did my reads go?](#where-did-my-reads-go)
+         * [Comparisons of some defaults parameters: STAR and Subjunc](#comparisons-of-some-defaults-parameters-star-and-subjunc)
+         * [Read-through adapters](#read-through-adapters)
+         * [Methods comparison](#methods-comparison)
+      * [Tips learnt](#tips-learnt)
 
 # Align RNA-Seq data with adapter contamination 
 
