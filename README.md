@@ -6,7 +6,7 @@
 		- [Comparisons of some defaults parameters: STAR and Subjunc](#)
 		- [Read-through adapters](#)
 		- [Methods comparison](#)
-  - [Conclusions](#)
+  	- [Conclusions](#)
 
 
 # Align RNA-Seq data with adapter contamination 
@@ -63,9 +63,10 @@ In order to fully understand what was going on I took six samples (every run on 
 ![Nmapped_125bp](https://cloud.githubusercontent.com/assets/7087258/22637397/b915722c-ec95-11e6-8be7-49d443760e75.png)
 
 
-# Conclusions
+## Tips learnt
 
-- STAR by default only outputs proper pairs cause its developer suggests that singleton have overall poorer quality. Checking the FASTQC on the unmapped reads from STAR shows that normally what happens is that the second mate in the pair is of poorer quality (this is only the most striking remark). 
+- Is FASTQC shows a remarkable adapter contamination is best to rmeove it if running STAR with default parameters.
+- STAR by default only outputs proper pairs cause its developer suggests that singleton have overall poorer quality. FASTQC reports of the STAR unmapped reads show that normally what happens is that the second mate in the pair is of poorer quality (this is only the most striking remark). 
 - STAR outputs a pair only if it can map at least the 66% of the initial fragment (e.g. 0.66 x 200 bp with 100 bp reads).
 - Subjunc on the contrary aligns singleton by default, that is why it maps also the unmapped reads from STAR with a 70-80% mapping proportion.
 - However, the proportion of unmapped reads is relatively small and negligible given the poor quality (~1-3% of the initial library size)
