@@ -48,10 +48,10 @@ A steep bump (loss of short fragments??) in correspondence of the read lengths (
 In order to fully understand what was going on I took six samples (every run on every flowcell) out of the initial 70 samples and I tried the following combinations:
 
 - STAR untrimmed (as my initial run)
-- STAR trimmed with ![Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+- STAR trimmed with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
 - STAR trimming the 25 bp of the 125 bp libraries
 - Subjunc untrimmed
-- Subjunc trimmed with ![Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+- Subjunc trimmed with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
 
 
 ![prop_mapped_star_runs](https://cloud.githubusercontent.com/assets/7087258/22636103/e2b17d50-ec8c-11e6-8943-806f1cca99d5.png)
