@@ -1,18 +1,6 @@
-   * [Align RNA-Seq data with adapter contamination](#align-rna-seq-data-with-adapter-contamination)
-      * [How the worries started](#how-the-worries-started)
-      * [Where did my reads go?](#where-did-my-reads-go)
-         * [Comparisons of some defaults parameters: STAR and Subjunc](#comparisons-of-some-defaults-parameters-star-and-subjunc)
-         * [Some notes on read-through adapters](#some-notes-on-read-through-adapters)
-      * [Methods comparison](#methods-comparison)
-         * [Results](#results)
-   * [Tips learnt](#tips-learnt)
-
-
-# Align RNA-Seq data with adapter contamination 
-
 Below is a comparison of [STAR](https://github.com/alexdobin/STAR) and [Subjunc](http://bioinf.wehi.edu.au/subjunc/) in the way they deal with adapter contamination in RNA-Seq using their defaults parameters. 
 
-## How the worries started
+# How the worries started
 
 My classic RNA-Seq pipeline includes STAR as aligner. Before working with these data I had never paid too much attention at adapter contamination since the most recent split-aware aligners should take care of it. I simply noticed the issue since I was working with a set of samples that had been run on two different flowcells, using 100 bp reads on one flowcell and 125 bp reads on the other flowcell. When comparing the proportion of uniquely mapped reads with the 125 bp libraries vs the 100 bp libraries for every run of each sample I obtained the following worrying plot:
 
@@ -20,15 +8,15 @@ My classic RNA-Seq pipeline includes STAR as aligner. Before working with these 
 
 For every sample there are two labels (every sample on every flowcell has two runs). This shows that **the proportion of mapped reads is costantly lower for the 125 bp libraries than the 100 bp libraries**.
 
-## Where did my reads go? 
+# Where did my reads go? 
 
-### Comparisons of some defaults parameters: STAR and Subjunc 
+## Comparisons of some defaults parameters: STAR and Subjunc 
 
 - **Soft-Clip Adapters**. Both STAR and Subjunc (or Subread) soft clip adapters at the end of the reads. 
 - **Singleton**. With Paired End (PE) reads libraries STAR by default only outputs properly paired reads while SubJunc also outputs one of the two mates if only one can be mapped. However, STAR allows singleton when the length of one mate is less than 1/3 of the other mate (see this thread for more information [Singleton](https://groups.google.com/forum/#!searchin/rna-star/Singletons$20STAR$20controls$20the$20mapped$20length$2Fscore$20of$20the$20output$20reads$2C%7Csort:relevance/rna-star/K8yVdkTlWoY/-OWbbqx1AwAJ)).
 - **STAR filters of mapped fragment length**. By default STAR outputs a pair only if it can map at least the 66% of the initial fragment (e.g. 0.66 x 200 bp with 100 bp reads). You can tune this threshold by changing the default value for --outFilterScoreMinOverLread and --outFilterMatchNminOverLread (see [STAR Google Group thread](https://groups.google.com/forum/#!topic/rna-star/qNlabqkKfx8)).
 
-### Some notes on read-through adapters
+## Some notes on read-through adapters
 
 My adapter-related problems arose since I was working with libraris with a large number of short fragments, often also shorter than the read length. This is the reason why I observed a great adapter contamination in libraries with longer reads. Below is a vignette explaining this concepts:
 
@@ -42,7 +30,7 @@ Looking at the **fragments size distributions** across libraries is also really 
 
 A steep bump (**loss of short fragments??**) in correspondence of the read lengths (100 bp and 125 bp) attracted our attention!
 
-## Methods comparison
+# Methods comparison
 
 In order to fully understand what was going on, I took six samples (with every run on every flowcell) out of the initial set and I tried the following combinations:
 
@@ -52,7 +40,7 @@ In order to fully understand what was going on, I took six samples (with every r
 - Subjunc untrimmed
 - Subjunc trimmed with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) (min 8 bases match to remove adapter)
 
-### Results
+## Results
 
 ![prop_mapped_star_runs](https://cloud.githubusercontent.com/assets/7087258/22636103/e2b17d50-ec8c-11e6-8943-806f1cca99d5.png)
 
