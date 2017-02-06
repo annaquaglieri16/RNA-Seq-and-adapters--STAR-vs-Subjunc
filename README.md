@@ -1,3 +1,16 @@
+Table of Contents
+=================
+
+   * [Align RNA-Seq data with adapter contamination](#align-rna-seq-data-with-adapter-contamination)
+      * [How the worries started](#how-the-worries-started)
+      * [Where did my reads go?](#where-did-my-reads-go)
+         * [Comparisons of some defaults parameters: STAR and Subjunc](#comparisons-of-some-defaults-parameters-star-and-subjunc)
+         * [Some notes on read-through adapters](#some-notes-on-read-through-adapters)
+      * [Methods comparison](#methods-comparison)
+         * [Results](#results)
+   * [Tips learnt](#tips-learnt)
+
+
 # Align RNA-Seq data with adapter contamination 
 
 Below is a comparison of [STAR](https://github.com/alexdobin/STAR) and [Subjunc](http://bioinf.wehi.edu.au/subjunc/) in the way they deal with adapter contamination in RNA-Seq using their defaults parameters. 
@@ -67,7 +80,7 @@ In order to fully understand what was going on, I took six samples (with every r
 
 
 
-
+Thanks to [gh-md-toc](https://github.com/ekalinin/github-markdown-toc) for great easy way to create Table of Contents!
 
 
 
