@@ -6,7 +6,7 @@
 		- [Comparisons of some defaults parameters: STAR and Subjunc](#)
 		- [Read-through adapters](#)
 		- [Methods comparison](#)
-  	- [Conclusions](#)
+ - [Tips learnt](#)
 
 
 # Align RNA-Seq data with adapter contamination 
