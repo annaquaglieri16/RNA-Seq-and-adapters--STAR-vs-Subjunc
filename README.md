@@ -1,3 +1,13 @@
+**Table of Contents**  
+
+- [Align RNA-Seq data with adapter contamination](#)
+	- [How the worries started](#)
+	- [Where did my reads go?](#)
+		- [Comparisons of some defaults parameters: STAR and Subjunc](#)
+		- [Read-through adapters](#)
+		- [Methods comparison](#)
+  - [Conclusions](#)
+
 
 # Align RNA-Seq data with adapter contamination 
 
@@ -51,9 +61,6 @@ In order to fully understand what was going on I took six samples (every run on 
 ![Nmapped_100bp](https://cloud.githubusercontent.com/assets/7087258/22637395/b5d932b0-ec95-11e6-9db9-69cf27b07fa1.png)
 
 ![Nmapped_125bp](https://cloud.githubusercontent.com/assets/7087258/22637397/b915722c-ec95-11e6-8be7-49d443760e75.png)
-
-
-![prop_mapped_star_runs](https://cloud.githubusercontent.com/assets/7087258/22636103/e2b17d50-ec8c-11e6-8943-806f1cca99d5.png)
 
 
 # Conclusions
