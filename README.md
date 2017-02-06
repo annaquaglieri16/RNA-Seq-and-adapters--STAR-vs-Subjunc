@@ -1,38 +1,15 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/annaquagli/something_meaningful/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+# Align RNA-Seq data with adapter contamination 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Below is a comparison of [STAR](https://github.com/alexdobin/STAR) and [Subjunc](http://bioinf.wehi.edu.au/subjunc/) in the way they deal with adapter contamination using their defaults parameters. 
 
-### Markdown
+### Some default comparisons
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- **Soft-Clip Adapters**. Both STAR and Subjunc (Subread) soft clip adapter at the end of the reads. 
+- **Singleton**. With Paired End (PE) reads libraries STAR by default only outputs properly paired reads while SubJunc also outputs only one of the two mates.
+- **STAR fragment mapped filter**. By default STAR outputs a pair only if it can map at least the 66% of the initial fragment (e.g. 0.66 x 200 bp with 100 bp reads). You can tune this threshold by changing the default value for *****
 
-```markdown
-Syntax highlighted code block
+Given that, my adapter-related problems arose since I am working with a library where a large number of short fragments, often also shorter than the read length. This is the reason why I observed a great adapter contamination in my libraries, especially for libraries with longer reads. Below is a vignette explaining this concepts:
 
-# Header 1
-## Header 2
-### Header 3
+![Read-ThroughAdapters](https://cloud.githubusercontent.com/assets/7087258/22636440/46eb5c62-ec8f-11e6-81b6-c8ee51b58c94.png)
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-```
-
-![Link](https://cloud.githubusercontent.com/assets/7087258/22635632/02c38c40-ec89-11e6-8950-c1425239602c.png)
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/annaquagli/something_meaningful/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
