@@ -49,7 +49,7 @@ In order to fully understand what was going on I took six samples (every run on 
 
 - STAR untrimmed (as my initial run)
 - STAR trimmed with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
-- STAR trimming the 25 bp of the 125 bp libraries
+- STAR trimming the 25 bp of the 125 bp libraries (remove the bias by setting the same read length)
 - Subjunc untrimmed
 - Subjunc trimmed with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
 
@@ -65,10 +65,12 @@ In order to fully understand what was going on I took six samples (every run on 
 
 # Conclusions
 
-- STAR by default only outputs proper pairs cause its developer (Alex Dobin) suggests that singleton have overall poorer quality. Checking the FASTQC on the unmapped reads from STAR shows that normally what happens is that the second mate in the pair is of poorer quality (this is only the most striking remark). 
+- STAR by default only outputs proper pairs cause its developer suggests that singleton have overall poorer quality. Checking the FASTQC on the unmapped reads from STAR shows that normally what happens is that the second mate in the pair is of poorer quality (this is only the most striking remark). 
+- STAR outputs a pair only if it can map at least the 66% of the initial fragment (e.g. 0.66 x 200 bp with 100 bp reads).
 - Subjunc on the contrary aligns singleton by default, that is why it maps also the unmapped reads from STAR with a 70-80% mapping proportion.
-- However, the proportion of unmapped reads is relatively small and negligible given the poor quality (~1-3% of the initial library size). Anyway STAR can be instructed to align singleton by tuning the --outFilterScoreMinOverLread and --outFilterMatchNminOverLread arguments. 
-- Trimming adapters improves the QC and increase the number of aligned reads in STAR which is now similar to Subjunc (Subjunc still maps singleton)
+- However, the proportion of unmapped reads is relatively small and negligible given the poor quality (~1-3% of the initial library size)
+- STAR can be instructed to align singleton by tuning the --outFilterScoreMinOverLread and --outFilterMatchNminOverLread arguments < 0.50. 
+- Trimming adapters improves the QC and increase the number of aligned reads in STAR (using default parameters) which is now similar to Subjunc 
 - Trimming the last 25bp of the reads improves QC and alignemnt but it does not as good as proper adapter trimming
 
 
