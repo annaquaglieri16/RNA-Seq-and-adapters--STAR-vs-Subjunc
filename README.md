@@ -1,3 +1,6 @@
+Table of Contents
+=================
+   
    * [How the worries started](#how-the-worries-started)
    * [Where did my reads go?](#where-did-my-reads-go)
       * [Comparisons of some defaults parameters: STAR and Subjunc](#comparisons-of-some-defaults-parameters-star-and-subjunc)
