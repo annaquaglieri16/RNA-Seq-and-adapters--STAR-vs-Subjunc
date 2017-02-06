@@ -7,7 +7,7 @@ Table of Contents
          * [Comparisons of some defaults parameters: STAR and Subjunc](#comparisons-of-some-defaults-parameters-star-and-subjunc)
          * [Read-through adapters](#read-through-adapters)
          * [Methods comparison](#methods-comparison)
-      * [Tips learnt](#tips-learnt)
+    * [Tips learnt](#tips-learnt)
 
 # Align RNA-Seq data with adapter contamination 
 
@@ -63,7 +63,7 @@ In order to fully understand what was going on I took six samples (every run on 
 ![Nmapped_125bp](https://cloud.githubusercontent.com/assets/7087258/22637397/b915722c-ec95-11e6-8be7-49d443760e75.png)
 
 
-## Tips learnt
+# Tips learnt
 
 - Is FASTQC shows a remarkable adapter contamination is best to rmeove it if running STAR with default parameters.
 - STAR by default only outputs proper pairs cause its developer suggests that singleton have overall poorer quality. FASTQC reports of the STAR unmapped reads show that normally what happens is that the second mate in the pair is of poorer quality (this is only the most striking remark). 
