@@ -1,3 +1,11 @@
+   * [How the worries started](#how-the-worries-started)
+   * [Where did my reads go?](#where-did-my-reads-go)
+      * [Comparisons of some defaults parameters: STAR and Subjunc](#comparisons-of-some-defaults-parameters-star-and-subjunc)
+      * [Some notes on read-through adapters](#some-notes-on-read-through-adapters)
+   * [Methods comparison](#methods-comparison)
+      * [Results](#results)
+   * [Tips learnt](#tips-learnt)
+
 Below is a comparison of [STAR](https://github.com/alexdobin/STAR) and [Subjunc](http://bioinf.wehi.edu.au/subjunc/) in the way they deal with adapter contamination in RNA-Seq using their defaults parameters. 
 
 # How the worries started
