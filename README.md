@@ -16,8 +16,8 @@ For every sample there are two labels (every sample on every flowcell has two ru
 ### Comparisons of some defaults parameters: STAR and Subjunc 
 
 - **Soft-Clip Adapters**. Both STAR and Subjunc (Subread) soft clip adapter at the end of the reads. 
-- **Singleton**. With Paired End (PE) reads libraries STAR by default only outputs properly paired reads while SubJunc also outputs only one of the two mates.
-- **STAR fragment mapped filter**. By default STAR outputs a pair only if it can map at least the 66% of the initial fragment (e.g. 0.66 x 200 bp with 100 bp reads). You can tune this threshold by changing the default value for *****
+- **Singleton**. With Paired End (PE) reads libraries STAR by default only outputs properly paired reads while SubJunc also outputs only one of the two mates. However, STAR allows singleton when the length of one mate is less than 1/3 of the other mate.
+- **STAR filter of mapped fragment length **. By default STAR outputs a pair only if it can map at least the 66% of the initial fragment (e.g. 0.66 x 200 bp with 100 bp reads). You can tune this threshold by changing the default value for --outFilterScoreMinOverLread and --outFilterMatchNminOverLread (see [STAR Google Group thread](https://groups.google.com/forum/#!topic/rna-star/qNlabqkKfx8) for this concept).
 
 ### Read-through adapters
 
@@ -27,11 +27,45 @@ My adapter-related problems arose since I am working with libraris with a large 
 
 This concept is also clearly explained at [QCfail.com](https://sequencing.qcfail.com/). 
 
-Looking at the **fragments size distributions** across libraries is also really useful to spot problems. Below is the example of what I was oberseving after aligning the RNA-Seq libraries untrimmed with STAR (Isize collected with ![PicardTools](https://broadinstitute.github.io/picard/command-line-overview.html) and plot creates with ![MultiQC](http://multiqc.info/)). 
+Looking at the **fragments size distributions** across libraries is also really useful to spot problems. Below is the example of what I was oberseving after aligning the RNA-Seq libraries untrimmed with STAR (Isize collected with [PicardTools](https://broadinstitute.github.io/picard/command-line-overview.html) and plot creates with [MultiQC](http://multiqc.info/)). 
 
 ![isize](https://cloud.githubusercontent.com/assets/7087258/22636909/ca8cae4c-ec92-11e6-8551-eab42a35a67a.png)
 
-A steep bump in correspondence of the read lengths (100 bp and 125 bp) attracted our attention!
+A steep bump (loss of short fragments??) in correspondence of the read lengths (100 bp and 125 bp) attracted our attention!
+
+### Methods comparison
+
+In order to fully understand what was going on I took six samples (every run on every flowcell) out of the initial 70 samples and I tried the following combinations:
+
+- STAR untrimmed (as my initial run)
+- STAR trimmed with ![Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+- STAR trimming the 25 bp of the 125 bp libraries
+- Subjunc untrimmed
+- Subjunc trimmed with ![Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+
+
+![prop_mapped_star_runs](https://cloud.githubusercontent.com/assets/7087258/22636103/e2b17d50-ec8c-11e6-8943-806f1cca99d5.png)
+
+![prop_mapped_SJ_runs](https://cloud.githubusercontent.com/assets/7087258/22637235/f0e6b14e-ec94-11e6-830e-1d427f197431.png)
+
+![Nmapped_100bp](https://cloud.githubusercontent.com/assets/7087258/22637395/b5d932b0-ec95-11e6-9db9-69cf27b07fa1.png)
+
+![Nmapped_125bp](https://cloud.githubusercontent.com/assets/7087258/22637397/b915722c-ec95-11e6-8be7-49d443760e75.png)
+
+
+![prop_mapped_star_runs](https://cloud.githubusercontent.com/assets/7087258/22636103/e2b17d50-ec8c-11e6-8943-806f1cca99d5.png)
+
+
+# Conclusions
+
+- STAR by default only outputs proper pairs cause its developer (Alex Dobin) suggests that singleton have overall poorer quality. Checking the FASTQC on the unmapped reads from STAR shows that normally what happens is that the second mate in the pair is of poorer quality (this is only the most striking remark). 
+- Subjunc on the contrary aligns singleton by default, that is why it maps also the unmapped reads from STAR with a 70-80% mapping proportion.
+- However, the proportion of unmapped reads is relatively small and negligible given the poor quality (~1-3% of the initial library size). Anyway STAR can be instructed to align singleton by tuning the --outFilterScoreMinOverLread and --outFilterMatchNminOverLread arguments. 
+- Trimming adapters improves the QC and increase the number of aligned reads in STAR which is now similar to Subjunc (Subjunc still maps singleton)
+- Trimming the last 25bp of the reads improves QC and alignemnt but it does not as good as proper adapter trimming
+
+
+
 
 
 
