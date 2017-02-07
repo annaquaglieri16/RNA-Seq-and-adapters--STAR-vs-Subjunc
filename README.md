@@ -1,4 +1,4 @@
-Tips on aligning RNA-Seq tips with adapter contamination: STAR vs Subjunc 
+Tips on aligning RNA-Seq with adapter contamination: STAR vs Subjunc 
 =========================================================================
    
    * [How the worries started](#how-the-worries-started)
