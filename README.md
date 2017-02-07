@@ -51,6 +51,55 @@ In order to fully understand what was going on, I took six samples (with every r
 - Subjunc untrimmed
 - Subjunc trimmed with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) (min 8 bases match to remove adapter)
 
+``` bash
+# Trimmomatic code: 
+
+java -jar path_to_Trimmomatic-0.36/trimmomatic-0.36.jar PE $FQ1 $FQ2 \
+-baseout ${fastq_dir}/${nameout}.fastq.gz \
+ILLUMINACLIP:path_to_Trimmomatic-0.36/adapters/TruSeq3-PE-2.fa:2:30:10:8:TRUE LEADING:0 TRAILING:0 -threads 10 
+
+# Trimmomatic code to trim only 25 bp at the end of the 125 bp reads: 
+
+java -jar /home/users/allstaff/quaglieri.a/software/Trimmomatic-0.36/trimmomatic-0.36.jar PE $FQ1 $FQ2 \
+-baseout ${fast_ex_dir}/fastq_trimmed_25bp/${nameout}.fastq.gz \
+CROP:100 LEADING:0 TRAILING:0 -threads 10 
+
+# STAR running parameters
+
+STAR \
+--genomeDir $genome \ # index to be created before
+--readFilesIn ${FQ1} ${FQ2} \
+--readFilesCommand zcat \
+--runThreadN $(nproc) \
+--outFilterType BySJout \
+--outFilterMultimapNmax 15 \
+--alignSJoverhangMin 8 \
+--outBAMcompression 10 \
+--alignSJDBoverhangMin 1 \
+--limitBAMsortRAM 84033479973 \
+--outFilterMismatchNmax 999 \
+--alignIntronMin 20 \
+--outReadsUnmapped Fastx \
+--chimSegmentMin 10 \
+--chimSegmentReadGapMax 6 \
+--chimOutType WithinBAM \
+--alignIntronMax 200000 \ # min intron
+--alignMatesGapMax 200000 \ # for chimeric reads
+--outFileNamePrefix ${outdir}/${sampleout} \
+--outSAMtype BAM SortedByCoordinate 
+
+# Subjunc arguments
+
+buildindex(basename="hg19_index",reference=genome_fasta,indexSplit=FALSE,gappedIndex=FALSE)
+
+subjunc(index="hg19_index",
+	readfile1=targets$FQ1,readfile2=targets$FQ2,input_format="gzFASTQ",output_format="BAM",
+      output_file=targets$outputName,unique=TRUE,indels=5,nthreads=10)
+
+
+``` 
+
+
 ## Results
 
 ![prop_mapped_star_runs](https://cloud.githubusercontent.com/assets/7087258/22636103/e2b17d50-ec8c-11e6-8943-806f1cca99d5.png)
